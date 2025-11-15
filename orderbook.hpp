@@ -18,6 +18,7 @@ using Quantity = int;
 
 class Order {
 public:
+   Order() = default;
    Order(Id orderId, Price level, bool isBuy, Quantity quantity) :
    orderId_(orderId), level_(level), isBuy_(isBuy), quantity_(quantity) {}
 
