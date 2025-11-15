@@ -1,3 +1,5 @@
+#ifndef ORDERBOOK_HPP
+#define ORDERBOOK_HPP
 #include <iostream>
 #include <cstddef>
 #include <vector>
@@ -154,4 +156,4 @@ private:
    };
    std::unordered_map<Id, Locator> loc;
 };
-
+#endif //ORDERBOOK_HPP
