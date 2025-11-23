@@ -30,6 +30,7 @@ private:
     MpscQueue<EngineMsg>& inbound_;
     std::atomic<bool> running_;
     Orderbook book_;
+    std::atomic<size_t> tradeCount_;
 };
 
 #endif // ENGINE_HPP
