@@ -28,7 +28,7 @@ public:
             if (pos - tail >= capacity_) return false;
             if (head_.compare_exchange_weak(
                     pos, pos + 1,
-                    std::memory_order_acq_rel
+                    std::memory_order_acq_rel,
                     std::memory_order_relaxed)) {
                 auto& s = seq_[pos & mask_];
                 while (s.load(std::memory_order_acquire) != pos) {}
