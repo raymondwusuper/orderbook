@@ -5,6 +5,8 @@
 #include <cstdint>
 #include "orderbook.hpp"
 #include "mpsc_queue.hpp"
+#include "spsc_queue.hpp"
+#include "events.hpp"
 
 enum class MsgType : uint8_t { Add, Cancel };
 
@@ -19,7 +21,7 @@ struct EngineMsg {
 
 class MatchingEngine {
 public:
-    explicit MatchingEngine(MpscQueue<EngineMsg>& inbound);
+    MatchingEngine(MpscQueue<EngineMsg>& inbound, SpscQueue<Event>& outbound);
 
     void run();
     void stop();
@@ -28,10 +30,10 @@ public:
 
 private:
     MpscQueue<EngineMsg>& inbound_;
+    SpscQueue<Event>& outbound_;
     std::atomic<bool> running_;
     Orderbook book_;
-    std::atomic<size_t> tradeCount_;
+    Trades trade_buf_; 
 };
 
 #endif // ENGINE_HPP
-
